@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AdvertisementApp.Entities
 {
-    internal class AppRole
+    public class AppRole: BaseEntity
     {
+        public string Definition { get; set; }
+        public List<AppUserRole> AppUserRoles { get; set; }
     }
 }

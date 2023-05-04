@@ -10,6 +10,6 @@ namespace AdvertisementApp.Entities
     {
         public string Definition { get; set; }
 
-        public List<AdvertisementAppUser>AdvertisementAppUsers { get; set; }
+        public List<AdvertisementAppUser> AdvertisementAppUsers { get; set; }
     }
 }
