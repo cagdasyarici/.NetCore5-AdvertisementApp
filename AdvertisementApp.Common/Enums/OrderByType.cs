@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AdvertisementApp.Common.Enums
 {
-    internal class OrderByType
+    public enum OrderByType
     {
+        ASC = 1, DESC = 2
     }
 }

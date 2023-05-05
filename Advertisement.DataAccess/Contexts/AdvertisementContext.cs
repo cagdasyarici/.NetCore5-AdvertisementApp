@@ -27,8 +27,6 @@ namespace AdvertisementApp.DataAccess.Contexts
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new MilitaryStatusConfiguration());
             modelBuilder.ApplyConfiguration(new ProvidedServiceConfiguration());
-            modelBuilder.ApplyConfiguration(new AdvertisementAppUserConfiguration());
-            modelBuilder.ApplyConfiguration(new AdvertisementAppUserConfiguration());
         }
         public DbSet<Advertisement> Advertisements { get; set; }
         public DbSet<AdvertisementAppUser> AdvertisementAppUsers { get; set; }
