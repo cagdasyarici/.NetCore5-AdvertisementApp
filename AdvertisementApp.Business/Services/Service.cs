@@ -3,7 +3,7 @@ using AdvertisementApp.Business.Interfaces;
 using AdvertisementApp.Common;
 using AdvertisementApp.DataAccess.UnitOfWork;
 using AdvertisementApp.Dtos.Interfaces;
-using AdvertisementApp.Dtos.ProvidedServiceDtos;
+using AdvertisementApp.Dtos;
 using AdvertisementApp.Entities;
 using AutoMapper;
 using FluentValidation;
