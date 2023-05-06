@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdvertisementApp.DataAccess.UnitOfWork
 {
-    public class Uow
+    public class Uow : IUow
     {
         private readonly AdvertisementContext _context;
 
@@ -22,6 +22,11 @@ namespace AdvertisementApp.DataAccess.UnitOfWork
         public IRepository<T> GetReposity<T>() where T : BaseEntity
         {
             return new Repository<T>(_context);
+        }
+        
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
