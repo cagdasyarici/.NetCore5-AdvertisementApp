@@ -1,16 +1,15 @@
-﻿using AdvertisementApp.Common;
-using FluentValidation.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdvertisementApp.Common;
 
 namespace AdvertisementApp.Business.Extensions
 {
     public static class ValidationResultExtension
     {
-        public static List<CustomValidationError> ConvertToCustomValidationError(this ValidationResult validationResult)
+        public static List<CustomValidationError> ConvertToCustomValidationError(this FluentValidation.Results.ValidationResult validationResult)
         {
             List<CustomValidationError> errors = new();
             foreach (var error in validationResult.Errors)
@@ -18,7 +17,7 @@ namespace AdvertisementApp.Business.Extensions
                 errors.Add(new()
                 {
                     ErrorMessage = error.ErrorMessage,
-                    PropertyName = error.PropertyName,
+                    PropertyName = error.PropertyName
                 });
             }
 

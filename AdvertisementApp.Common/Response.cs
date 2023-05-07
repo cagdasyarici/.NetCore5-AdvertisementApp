@@ -13,15 +13,18 @@ namespace AdvertisementApp.Common
             ResponseType = responseType;
         }
 
-        public Response(ResponseType responseType,string message)
+        public Response(ResponseType responseType, string messsage)
         {
-            ResponseType= responseType;
-            Message = message;
+            ResponseType = responseType;
+            Message = messsage;
         }
+
         public string Message { get; set; }
 
         public ResponseType ResponseType { get; set; }
     }
+
+
     public enum ResponseType
     {
         Success,

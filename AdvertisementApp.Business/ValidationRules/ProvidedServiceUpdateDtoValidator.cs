@@ -1,10 +1,10 @@
-﻿using AdvertisementApp.Dtos;
-using FluentValidation;
+﻿using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdvertisementApp.Dtos;
 
 namespace AdvertisementApp.Business.ValidationRules
 {
@@ -12,10 +12,10 @@ namespace AdvertisementApp.Business.ValidationRules
     {
         public ProvidedServiceUpdateDtoValidator()
         {
-            RuleFor(x=>x.Id).NotEmpty();
-            RuleFor(x=>x.Description).NotEmpty();
-            RuleFor(x=>x.Title).NotEmpty();
-            RuleFor(x=>x.ImagePath).NotEmpty();
+            RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.Description).NotEmpty();
+            RuleFor(x => x.Title).NotEmpty();
+            RuleFor(x => x.ImagePath).NotEmpty();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdvertisementApp.Entities
 {
-    public class MilitaryStatus :BaseEntity
+    public class MilitaryStatus : BaseEntity
     {
         public string Definition { get; set; }
 

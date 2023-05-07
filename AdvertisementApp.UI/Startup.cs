@@ -1,14 +1,17 @@
-using AdvertisementApp.Business.DependencyResolvers.Microsoft;
+using AutoMapper;
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AdvertisementApp.Business.DependencyResolvers.Microsoft;
+using AdvertisementApp.Business.Helpers;
+using AdvertisementApp.UI.Mappings.AutoMapper;
+using AdvertisementApp.UI.Models;
+using AdvertisementApp.UI.ValidationRules;
 
 namespace AdvertisementApp.UI
 {
@@ -16,6 +19,7 @@ namespace AdvertisementApp.UI
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
         public IConfiguration Configuration { get; set; }
 
         public Startup(IConfiguration configuration)
@@ -26,7 +30,32 @@ namespace AdvertisementApp.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencies(Configuration);
+            services.AddTransient<IValidator<UserCreateModel>, UserCreateModelValidator>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(opt=> {
+        opt.Cookie.Name = "UdemyCookie";
+        opt.Cookie.HttpOnly = true;
+        opt.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+        opt.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
+        opt.ExpireTimeSpan = TimeSpan.FromDays(20);
+    });
+
             services.AddControllersWithViews();
+
+
+
+            var profiles = ProfileHelper.GetProfiles();
+
+            profiles.Add(new UserCreateModelProfile());
+
+            var configuration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfiles(profiles);
+            });
+
+            var mapper = configuration.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +69,8 @@ namespace AdvertisementApp.UI
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
